@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import Link from 'next/link'
 import { Typography } from '@/components/ui/Typography'
 import { Section } from '@/components/ui/Section'
 import { Card, CardContent } from '@/components/ui/Card'
@@ -6,94 +7,100 @@ import { Button } from '@/components/ui/Button'
 import { MainLayout } from '@/components/layout'
 
 export const metadata: Metadata = {
-  title: 'Startup Services - The SIIT Company',
-  description: 'MVP development, product scaling, and technical strategy services designed specifically for solo founders and early-stage startups.',
+  title: 'Technology Services - The SIIT Company',
+  description: 'Mobile app development, web development, API services, cloud infrastructure, e-commerce, and data analytics for modern businesses.',
 }
 
 const services = [
   {
-    title: "MVP Development & Validation",
-    description: "Get your product to market fast with a lean, validated minimum viable product that users actually want.",
-    features: [
-      "Rapid prototyping in 2-4 weeks",
-      "User testing & feedback integration", 
-      "Core feature prioritization",
-      "Technical debt minimization"
-    ],
-    icon: "⚡",
-    pricing: "Starting at $15,000",
-    timeline: "3-6 weeks",
-    ideal: "Pre-seed startups, solo founders with validated ideas"
-  },
-  {
-    title: "Product Scaling & Optimization",
-    description: "Scale your successful MVP to handle growth without breaking your budget or timeline.",
-    features: [
-      "Performance optimization",
-      "Database scaling strategies",
-      "Infrastructure automation",
-      "Load testing & monitoring"
-    ],
-    icon: "📈",
-    pricing: "Starting at $25,000",
-    timeline: "6-12 weeks",
-    ideal: "Post-MVP startups experiencing growth"
-  },
-  {
-    title: "Technical Strategy & Architecture",
-    description: "Make smart technology decisions that save money and avoid costly mistakes down the road.",
-    features: [
-      "Tech stack recommendations",
-      "Architecture planning",
-      "Security best practices",
-      "Cost optimization strategies"
-    ],
-    icon: "🧠",
-    pricing: "Starting at $8,000",
-    timeline: "2-4 weeks",
-    ideal: "Technical founders needing validation, non-technical founders"
-  },
-  {
-    title: "No-Code/Low-Code Solutions",
-    description: "Validate your idea and build your first version without writing code from scratch.",
-    features: [
-      "Rapid prototype development",
-      "Integration setup",
-      "Workflow automation",
-      "Custom business logic"
-    ],
-    icon: "🔧",
-    pricing: "Starting at $5,000",
-    timeline: "1-3 weeks",
-    ideal: "Early-stage validation, non-technical founders"
-  },
-  {
     title: "Mobile App Development",
-    description: "Native and cross-platform mobile apps that engage users and drive business growth.",
+    description: "Cross-platform mobile applications for iOS and Android using React Native and Flutter.",
     features: [
-      "iOS & Android development",
-      "Cross-platform solutions",
-      "App store optimization",
-      "Push notifications & analytics"
+      "Cross-platform development",
+      "Native performance optimization",
+      "Real-time data synchronization",
+      "App store deployment"
     ],
     icon: "📱",
-    pricing: "Starting at $30,000",
-    timeline: "8-16 weeks",
-    ideal: "Mobile-first startups, consumer applications"
+    pricing: "Starting at $15,000",
+    timeline: "6-12 weeks",
+    ideal: "Mobile-first businesses, consumer applications",
+    link: "/services/mobile-app-development"
   },
   {
-    title: "Technical Due Diligence",
-    description: "Get your technology ready for funding rounds with comprehensive technical assessments.",
+    title: "Web Development",
+    description: "Full-stack web applications with modern frameworks and scalable architecture.",
     features: [
-      "Code quality assessment",
-      "Security audit",
-      "Scalability analysis",
-      "Technical debt evaluation"
+      "React & Next.js development",
+      "Responsive design",
+      "SEO optimization",
+      "Performance optimization"
     ],
-    icon: "🔍",
+    icon: "🌐",
+    pricing: "Starting at $5,000",
+    timeline: "4-8 weeks",
+    ideal: "SaaS platforms, business websites",
+    link: "/services/web-development"
+  },
+  {
+    title: "API Development",
+    description: "RESTful APIs, GraphQL services, and microservices for seamless integrations.",
+    features: [
+      "REST & GraphQL APIs",
+      "Microservices architecture",
+      "Third-party integrations",
+      "Real-time capabilities"
+    ],
+    icon: "🔌",
+    pricing: "Starting at $8,000",
+    timeline: "3-6 weeks",
+    ideal: "Data-driven applications, system integrations",
+    link: "/services/api-development"
+  },
+  {
+    title: "Cloud Infrastructure",
+    description: "Scalable cloud solutions on AWS, Azure, and Google Cloud Platform.",
+    features: [
+      "Cloud migration strategy",
+      "Infrastructure as Code",
+      "Auto-scaling setup",
+      "Security & compliance"
+    ],
+    icon: "☁️",
     pricing: "Starting at $10,000",
-    timeline: "2-3 weeks",
-    ideal: "Pre-funding startups, acquisition preparation"
+    timeline: "4-8 weeks",
+    ideal: "Growing businesses, enterprise applications",
+    link: "/services/cloud-infrastructure"
+  },
+  {
+    title: "E-commerce Development",
+    description: "Custom online stores and e-commerce platforms that drive sales and growth.",
+    features: [
+      "Shopify & custom platforms",
+      "Payment gateway integration",
+      "Inventory management",
+      "Mobile commerce optimization"
+    ],
+    icon: "�",
+    pricing: "Starting at $8,000",
+    timeline: "6-10 weeks",
+    ideal: "Retail businesses, online marketplaces",
+    link: "/services/e-commerce"
+  },
+  {
+    title: "Data Analytics",
+    description: "Business intelligence, data visualization, and machine learning solutions.",
+    features: [
+      "Interactive dashboards",
+      "Predictive analytics",
+      "Data pipeline automation",
+      "Machine learning models"
+    ],
+    icon: "�",
+    pricing: "Starting at $12,000",
+    timeline: "4-8 weeks",
+    ideal: "Data-driven businesses, enterprise analytics",
+    link: "/services/data-analytics"
   }
 ]
 
@@ -166,15 +173,17 @@ export default function ServicesPage() {
       <Section className="bg-gradient-to-br from-blue-600 to-blue-600/90 text-white">
         <div className="max-w-4xl mx-auto text-center">
           <Typography variant="h1" className="mb-6">
-            Services Built for Startup Success
+            Technology Services That Scale
           </Typography>
           <Typography variant="lead" className="opacity-90 mb-8">
-            From MVP to market leader. We provide the technical expertise and strategic guidance 
-            that solo founders and startup teams need to build, launch, and scale successfully.
+            From mobile apps to cloud infrastructure, we provide comprehensive technology solutions 
+            that help businesses innovate, grow, and stay competitive in the digital landscape.
           </Typography>
-          <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
-            Start Your Project Today
-          </Button>
+          <Link href="/contact">
+            <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
+              Start Your Project Today
+            </Button>
+          </Link>
         </div>
       </Section>
 
@@ -182,10 +191,10 @@ export default function ServicesPage() {
       <Section>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <Typography variant="h2" className="mb-4">Choose Your Growth Path</Typography>
+            <Typography variant="h2" className="mb-4">Our Technology Services</Typography>
             <Typography variant="lead" className="max-w-3xl mx-auto">
-              Whether you're validating an idea or scaling to millions of users, 
-              we have the right service to accelerate your startup journey.
+              Comprehensive technology solutions from mobile apps to cloud infrastructure, 
+              designed to help your business thrive in the digital economy.
             </Typography>
           </div>
 
@@ -227,9 +236,11 @@ export default function ServicesPage() {
                     </div>
                   </div>
 
-                  <Button className="w-full" variant="outline">
-                    Learn More
-                  </Button>
+                  <Link href={service.link}>
+                    <Button className="w-full" variant="outline">
+                      Learn More
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             ))}
@@ -241,10 +252,10 @@ export default function ServicesPage() {
       <Section className="bg-light-technical">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <Typography variant="h2" className="mb-4">Our Startup-Focused Process</Typography>
+            <Typography variant="h2" className="mb-4">Our Development Process</Typography>
             <Typography variant="lead" className="max-w-3xl mx-auto">
-              A proven 4-step process designed specifically for the speed and constraints 
-              that startups face.
+              A proven methodology that ensures your project is delivered on time, 
+              within budget, and exceeds your expectations.
             </Typography>
           </div>
 
@@ -305,18 +316,22 @@ export default function ServicesPage() {
       {/* CTA Section */}
       <Section className="bg-gradient-to-br from-deep-blue to-deep-blue/90 text-white">
         <div className="max-w-4xl mx-auto text-center">
-          <Typography variant="h2" className="mb-6">Ready to Build Your Startup?</Typography>
+          <Typography variant="h2" className="mb-6">Ready to Transform Your Business?</Typography>
           <Typography variant="p" className="mb-8 opacity-90 text-lg">
-            Join 150+ founders who've turned their ideas into successful businesses. 
+            Join hundreds of businesses who've accelerated their growth with our technology solutions. 
             Let's discuss your project and create a custom plan for your success.
           </Typography>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-deep-blue">
-              Get Your Free Consultation
-            </Button>
-            <Button variant="ghost" size="lg" className="text-white hover:bg-white/10">
-              View Success Stories
-            </Button>
+            <Link href="/contact">
+              <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-deep-blue">
+                Get Your Free Consultation
+              </Button>
+            </Link>
+            <Link href="/portfolio">
+              <Button variant="ghost" size="lg" className="text-white hover:bg-white/10">
+                View Our Work
+              </Button>
+            </Link>
           </div>
         </div>
       </Section>

@@ -10,34 +10,41 @@ import { cn } from '@/lib/utils'
 interface NavigationItem {
   label: string
   href: string
+  icon?: string
 }
 
 const navigation: NavigationItem[] = [
   {
     label: 'About',
     href: '/about',
+    icon: '👋'
   },
   {
     label: 'Services',
     href: '/services',
+    icon: '⚡'
   },
   {
     label: 'Portfolio',
     href: '/portfolio',
+    icon: '🚀'
   },
   {
     label: 'Blog',
     href: '/blog',
+    icon: '📝'
   },
   {
     label: 'Contact',
     href: '/contact',
+    icon: '💬'
   },
 ]
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null)
   const pathname = usePathname()
 
   useEffect(() => {
@@ -84,71 +91,127 @@ export default function Header() {
   return (
     <header
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-200 safe-top',
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 safe-top',
         isScrolled
-          ? 'bg-white/95 backdrop-blur-sm shadow-lg border-b border-slate-200'
-          : 'bg-white/10 backdrop-blur-sm border-b border-white/20'
+          ? 'bg-white/95 backdrop-blur-lg shadow-xl border-b border-slate-200/50 glass-morphism'
+          : 'bg-white/10 backdrop-blur-md border-b border-white/20'
       )}
     >
       <div className="container-responsive">
         <div className="flex justify-between items-center h-16 lg:h-20">
-          {/* Logo */}
+          {/* Logo with floating animation */}
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center space-x-2 touch-target">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-orange-500 rounded-lg flex items-center justify-center">
-                <Typography variant="small" className="font-bold text-white">
-                  T
+            <Link href="/" className="flex items-center space-x-3 touch-target group">
+              <div className="relative">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-600 via-purple-600 to-orange-500 rounded-xl flex items-center justify-center transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 animate-float">
+                  <Typography variant="large" className="font-display font-bold text-white">
+                    S
+                  </Typography>
+                </div>
+                <div className="absolute inset-0 w-10 h-10 bg-gradient-to-br from-blue-600 via-purple-600 to-orange-500 rounded-xl opacity-20 blur-lg animate-pulse"></div>
+              </div>
+              <div className="hidden sm:block">
+                <Typography variant="large" className={cn(
+                  "font-display font-bold transition-all duration-300 bg-gradient-to-r bg-clip-text text-transparent",
+                  isScrolled 
+                    ? "from-slate-900 via-blue-600 to-purple-600" 
+                    : "from-white via-blue-100 to-purple-100",
+                  "group-hover:scale-105"
+                )}>
+                  The SIIT Company
+                </Typography>
+                <Typography variant="small" className={cn(
+                  "font-mono text-xs tracking-wide transition-colors",
+                  isScrolled ? "text-slate-500" : "text-white/70"
+                )}>
+                  Tech • Innovation • Growth
                 </Typography>
               </div>
+              {/* Mobile logo text */}
               <Typography variant="large" className={cn(
-                "font-bold transition-colors hidden xs:block",
-                isScrolled ? "text-slate-900" : "text-white"
-              )}>
-                The SIIT Company
-              </Typography>
-              {/* Shorter name for very small screens */}
-              <Typography variant="large" className={cn(
-                "font-bold transition-colors xs:hidden",
-                isScrolled ? "text-slate-900" : "text-white"
+                "font-display font-bold transition-all duration-300 sm:hidden bg-gradient-to-r bg-clip-text text-transparent",
+                isScrolled 
+                  ? "from-slate-900 to-blue-600" 
+                  : "from-white to-blue-100"
               )}>
                 SIIT
               </Typography>
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
-            {navigation.map((item) => (
-              <Link
+          {/* Desktop Navigation with innovative design */}
+          <nav className="hidden lg:flex items-center space-x-2">
+            {navigation.map((item, index) => (
+              <div
                 key={item.href}
-                href={item.href}
-                className={cn(
-                  'text-sm font-medium transition-colors duration-200',
-                  isActivePath(item.href)
-                    ? 'text-orange-500'
-                    : isScrolled
-                    ? 'text-slate-700 hover:text-orange-500'
-                    : 'text-white hover:text-orange-300'
-                )}
+                className="relative"
+                onMouseEnter={() => setHoveredItem(item.href)}
+                onMouseLeave={() => setHoveredItem(null)}
               >
-                {item.label}
-              </Link>
+                <Link
+                  href={item.href}
+                  className={cn(
+                    'flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 group relative overflow-hidden',
+                    isActivePath(item.href)
+                      ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg'
+                      : isScrolled
+                      ? 'text-slate-700 hover:bg-slate-100 hover:text-blue-600'
+                      : 'text-white/90 hover:bg-white/10 hover:text-white'
+                  )}
+                >
+                  {/* Icon with bounce animation */}
+                  <span className={cn(
+                    "text-lg transition-transform duration-300",
+                    hoveredItem === item.href ? "animate-bounce-subtle" : "",
+                    isActivePath(item.href) ? "animate-bounce-subtle" : ""
+                  )}>
+                    {item.icon}
+                  </span>
+                  
+                  {/* Text with gradient animation */}
+                  <span className={cn(
+                    "text-sm font-medium transition-all duration-300 font-body",
+                    isActivePath(item.href) ? "font-semibold" : ""
+                  )}>
+                    {item.label}
+                  </span>
+                  
+                  {/* Animated background for hover */}
+                  {!isActivePath(item.href) && (
+                    <div className={cn(
+                      "absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-600/20 rounded-full opacity-0 transition-opacity duration-300",
+                      hoveredItem === item.href ? "opacity-100" : ""
+                    )} />
+                  )}
+                  
+                  {/* Active indicator */}
+                  {isActivePath(item.href) && (
+                    <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-white rounded-full animate-pulse" />
+                  )}
+                </Link>
+              </div>
             ))}
           </nav>
 
-          {/* CTA Button */}
+          {/* Enhanced CTA Button */}
           <div className="hidden lg:flex items-center space-x-4">
             <Link href="/contact">
               <Button 
                 variant="default" 
                 size="sm"
                 className={cn(
+                  "group relative overflow-hidden transition-all duration-300 transform hover:scale-105",
                   isScrolled 
-                    ? 'bg-blue-600 text-white hover:bg-blue-700' 
-                    : 'bg-white text-blue-600 hover:bg-white/90'
+                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl' 
+                    : 'bg-white/20 text-white backdrop-blur-sm hover:bg-white/30 border border-white/30'
                 )}
               >
-                Get Started
+                <span className="relative z-10 flex items-center space-x-2 font-medium">
+                  <span>Get Started</span>
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </span>
+                {/* Animated background */}
+                <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </Button>
             </Link>
           </div>
